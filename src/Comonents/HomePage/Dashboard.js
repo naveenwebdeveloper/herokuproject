@@ -17,7 +17,6 @@ const Dashboard = () => {
             const ComData = async () => {
                 async function usData() {
                     const companydata = await fetch('https://bharatbills.in/papi/service.php', {
-                        mode: 'no-cors',
                         method: 'POST',
                         headers: {
                             'user': uid,
