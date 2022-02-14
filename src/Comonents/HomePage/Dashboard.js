@@ -1,8 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Header from "../Header";
+import Cprofile from "../CompanyProfile/Cprofile";
+import Myprofile from "../Myprofile/Myprofile";
+import {
+    BrowserRouter,
+    Routes, // Just Use Routes instead of "Switch"
+    Route
+} from "react-router-dom";
+
 
 const Dashboard = () => {
+    const [userData, setuserData] = useState({});
     const Navigate = useNavigate();
     useEffect(() => {
         console.log("data is colled by useEffect");
@@ -32,12 +42,14 @@ const Dashboard = () => {
                 }
                 const Udata = await usData();
                 console.log(Udata);
+                setuserData(Udata.data);
+
             }
             ComData();
 
         }
 
-    });
+    }, []);
 
     const logout = () => {
         console.log("logout hits")
@@ -50,8 +62,11 @@ const Dashboard = () => {
 
     return (
         <>
-            <div>Deshboard</div>
-            <button onClick={logout}> Logout now</button>
+            <Header userName={userData.name} Logout={logout} />
+            <Routes>
+                <Route path="/Myprofile" element={<Myprofile />} />
+                <Route path="/" element={<Cprofile Data={userData} />} />
+            </Routes>
         </>
     );
 };

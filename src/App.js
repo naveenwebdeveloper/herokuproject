@@ -26,7 +26,7 @@ function App() {
         <Route path="/forgotPass" element={<ForgotPassword />} />
         <Route path="/forgotUser" element={<ForgotUsername />} />
         <Route path="/Dashboard" element={<Dashboard />} />
-        <Route path="*" element={<ErrorPage />} />
+        {/* <Route path="*" element={<ErrorPage />} /> */}
       </Routes>
     </BrowserRouter>
   );
