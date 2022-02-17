@@ -1,9 +1,13 @@
 import React from "react";
+import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../Header";
-import Cprofile from "../CompanyProfile/Cprofile";
-import Myprofile from "../Myprofile/Myprofile";
+import Mprofile from "../MyDetails/Mprofile";
+import Bills from "../Bills/Bills";
+import Ledgers from "../Ledger/Ledgers";
+import CompanyDetails from "../CompanyDetails/CompanyDetails";
+import ClipLoader from "react-spinners/ClipLoader";
 import {
     BrowserRouter,
     Routes, // Just Use Routes instead of "Switch"
@@ -12,6 +16,7 @@ import {
 
 
 const Dashboard = () => {
+    const [loader, setLoader] = useState(true);
     const [userData, setuserData] = useState({});
     const Navigate = useNavigate();
     useEffect(() => {
@@ -34,7 +39,7 @@ const Dashboard = () => {
                             //'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            'type': 'company_details'
+                            'type': 'my_details'
                         })
                     })
                         .then((res) => res.json()).then((res1) => res1).catch((err) => err);
@@ -43,6 +48,7 @@ const Dashboard = () => {
                 const Udata = await usData();
                 console.log(Udata);
                 setuserData(Udata.data);
+                setLoader(false)
 
             }
             ComData();
@@ -64,9 +70,12 @@ const Dashboard = () => {
         <>
             <Header userName={userData.name} Logout={logout} />
             <Routes>
-                <Route path="/Myprofile" element={<Myprofile />} />
-                <Route path="/" element={<Cprofile Data={userData} />} />
+                <Route path="Cdetails" element={<CompanyDetails />} />
+                <Route path="Bills" element={<Bills />} />
+                <Route path="Ledgers" element={<Ledgers />} />
+                <Route path="/" element={<Mprofile Data={userData} />} />
             </Routes>
+            <ClipLoader className="Spinning-loader" color={"blue"} loading={loader} size={150} />
         </>
     );
 };

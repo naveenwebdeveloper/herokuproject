@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Cprofile(props) {
+function Mprofile(props) {
     return (
         <div className="container profile-margin wrapper">
-            <h3 className='text-center' style={{ margin: "20px" }}>Company Details</h3>
+            <h3 className='text-center' style={{ margin: "20px" }}>My profile</h3>
             <div className="main-body">
                 <div className="row gutters-sm">
                     <div className="col-md-4 mb-3">
@@ -123,4 +123,4 @@ function Cprofile(props) {
     )
 }
 
-export default Cprofile
+export default Mprofile

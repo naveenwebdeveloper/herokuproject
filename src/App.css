@@ -12,12 +12,20 @@
 .dropdown-menu.show{
     display: block !important;
 } */
-
+.css-sdjtie{
+    position: absolute;
+    top: 50%;
+    right: 44%;
+}
 .profile-margin{
     margin-top: 20px;
 }
 body{
     background-color: blue;
+}
+.navbar-brand a{
+    text-decoration: none;
+    color: black;
 }
 .NavLinks a{
     text-decoration: none;
