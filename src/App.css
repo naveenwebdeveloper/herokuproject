@@ -31,6 +31,40 @@ body{
     text-decoration: none;
     color: gray;
 }
+.Table-Container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Table-filter{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: self-end;
+}
+.Table-filter > div{
+    margin: 5px;
+}
+.Table-filter > div > button{
+    height: 31px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media only screen and (max-width: 991px) {
     .NavLinks .NavUrls{
         display: block;

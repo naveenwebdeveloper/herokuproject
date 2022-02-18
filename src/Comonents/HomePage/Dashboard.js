@@ -9,10 +9,10 @@ import Ledgers from "../Ledger/Ledgers";
 import CompanyDetails from "../CompanyDetails/CompanyDetails";
 import ClipLoader from "react-spinners/ClipLoader";
 import {
-    BrowserRouter,
     Routes, // Just Use Routes instead of "Switch"
     Route
 } from "react-router-dom";
+import ErrorPage from "../../ErrorPage";
 
 
 const Dashboard = () => {
@@ -74,6 +74,7 @@ const Dashboard = () => {
                 <Route path="Bills" element={<Bills />} />
                 <Route path="Ledgers" element={<Ledgers />} />
                 <Route path="/" element={<Mprofile Data={userData} />} />
+                <Route path="*" element={<ErrorPage />} />
             </Routes>
             <ClipLoader className="Spinning-loader" color={"blue"} loading={loader} size={150} />
         </>
