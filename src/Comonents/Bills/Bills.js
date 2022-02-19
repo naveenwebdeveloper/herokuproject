@@ -7,6 +7,7 @@ function Bills() {
     const [loader, setLoader] = useState(true);
     const [userData, setuserData] = useState([]);
     useEffect(() => {
+
         const token = sessionStorage.getItem("UserToken");
         const uid = sessionStorage.getItem("Uid");
         console.log(token);

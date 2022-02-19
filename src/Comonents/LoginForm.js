@@ -8,11 +8,18 @@ import { RiLockPasswordLine } from 'react-icons/ri';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import { userLogin } from "../Redux/userSlice";
 
 const LoginForm = () => {
+  const userToken = useSelector((state) => state.user.userToken);
+  const Uid = useSelector((state) => state.user.uid);
+  const demotoken = "kasdlfjsdksdsdkjf";
+  const demouid = "2";
+  const dispatch = useDispatch()
   const Navigate = useNavigate();
   useEffect(() => {
-    console.log("data is colled by useEffect");
+    console.log("data is by useEffect");
     const auth = sessionStorage.getItem("UserToken");
     if (auth) {
       Navigate("/dashboard");
@@ -48,6 +55,10 @@ const LoginForm = () => {
     if (loginData.status) {
       sessionStorage.setItem('UserToken', loginData.token);
       sessionStorage.setItem('Uid', loginData.uid);
+      const Utoken = loginData.token;
+      const UUid = loginData.uid;
+      dispatch(userLogin({ Utoken, UUid }))
+
     }
     setapiData(loginData);
     console.log(loginData);
@@ -60,7 +71,7 @@ const LoginForm = () => {
       <div className="form-d">
         <p className="Login_message">{apiData.message}</p>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <label htmlFor="inputUsername">Username</label>
+          <label htmlFor="inputUsername">{userToken}</label>
           <div className="Input-icon">
             <input
               type="text"
@@ -79,7 +90,7 @@ const LoginForm = () => {
 
           {errors.Username && <p className="error">{errors.Username.message}</p>}
 
-          <label htmlFor="inputPassword">Password</label>
+          <label htmlFor="inputPassword">{Uid}</label>
           <div className="Input-icon">
             <input
               type="password"
@@ -103,6 +114,7 @@ const LoginForm = () => {
           </div>
         </form>
       </div >
+      <button onClick={() => dispatch(userLogin({ demotoken, demouid }))} >change the state</button>
     </div >
   );
 };

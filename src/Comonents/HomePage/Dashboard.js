@@ -8,6 +8,7 @@ import Bills from "../Bills/Bills";
 import Ledgers from "../Ledger/Ledgers";
 import CompanyDetails from "../CompanyDetails/CompanyDetails";
 import ClipLoader from "react-spinners/ClipLoader";
+import { useSelector, useDispatch } from 'react-redux'
 import {
     Routes, // Just Use Routes instead of "Switch"
     Route
@@ -16,6 +17,8 @@ import ErrorPage from "../../ErrorPage";
 
 
 const Dashboard = () => {
+    const userToken = useSelector((state) => state.user.userToken);
+    const Uid = useSelector((state) => state.user.uid);
     const [loader, setLoader] = useState(true);
     const [userData, setuserData] = useState({});
     const Navigate = useNavigate();
@@ -34,8 +37,8 @@ const Dashboard = () => {
                     const companydata = await fetch('https://bharatbills.in/papi/service.php', {
                         method: 'POST',
                         headers: {
-                            'user': uid,
-                            'token': token
+                            'user': Uid,
+                            'token': userToken
                             //'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
