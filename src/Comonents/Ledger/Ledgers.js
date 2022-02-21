@@ -9,15 +9,15 @@ function Ledgers() {
     const [thead, setthead] = useState([]);
     const [tbody, settbody] = useState([]);
     const [tfoot, settfoot] = useState([]);
+    const [errMess, seterrMess] = useState(true);
     // setfromDate(fromDate.getTime());
     // console.log(fromDate)
-    // const [userData, setuserData] = useState([]);
+    const [userData, setuserData] = useState([]);
     const token = sessionStorage.getItem("UserToken");
     const uid = sessionStorage.getItem("Uid");
 
     useEffect(() => {
         const DefaultTable = async () => {
-
             const fdate = String(fromDate.getDate()).padStart(2, '0');
             const fyear = fromDate.getFullYear();
             const fmonth = String(fromDate.getMonth() + 1).padStart(2, '0');
@@ -50,12 +50,18 @@ function Ledgers() {
             }
             const Udata = await usData();
             setisData(true);
-            console.log(Udata.data);
-            // setuserData(Udata.data);
-            setthead(Udata.data.thead);
-            settbody(Udata.data.tbody);
-            settfoot(Udata.data.tfoot);
-            console.log(fromDate);
+            console.log(Udata);
+            setuserData(Udata.data);
+            if (Udata.status == true) {
+                seterrMess(true);
+                setthead(Udata.data.thead);
+                settbody(Udata.data.tbody);
+                settfoot(Udata.data.tfoot);
+                console.log(fromDate);
+            } else {
+                seterrMess(false);
+            }
+
 
         }
         DefaultTable();
@@ -97,11 +103,18 @@ function Ledgers() {
         const Udata = await usData();
         setisData(true);
         console.log(Udata.data);
-        // setuserData(Udata.data);
-        setthead(Udata.data.thead);
-        settbody(Udata.data.tbody);
-        settfoot(Udata.data.tfoot);
-        console.log(fromDate);
+        // // setuserData(Udata.data);
+        // setthead(Udata.data.thead);
+        // settbody(Udata.data.tbody);
+        // settfoot(Udata.data.tfoot);
+        // console.log(fromDate);
+        if (Udata.status === true) {
+            seterrMess(true);
+            setthead(Udata.data.thead);
+            settbody(Udata.data.tbody);
+            settfoot(Udata.data.tfoot);
+            console.log(fromDate);
+        }
 
     }
 
@@ -119,38 +132,43 @@ function Ledgers() {
                         <h5>End Date</h5>
                         <DatePicker selected={toDate} onChange={(date) => settoDate(date)} />
                     </div>
+
                     <div>
                         <button onClick={ComData} type="button" className="btn btn-primary">Submit</button>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <table className="table col-xs-1 table-striped">
-                            {isData ? (<>
-                                <thead>
-                                    <tr>
-                                        {thead.map((user, index) => (
-                                            <th key={index} scope="col">{user}</th>
-                                        ))}
+                <div >
+                    {errMess ?
+                        <div>
+                            <div className='table-responsive'>
+                                <table className="table table-fixed col-xs-1 table-striped" style={{ height: "300px" }}>
+                                    {isData ? (<>
+                                        <thead style={{ position: "sticky", top: "0" }} className="thead-dark">
+                                            <tr>
+                                                {/* <th className="col-3">NO.</th> */}
+                                                {thead.map((user, index) => (
+                                                    <th key={index} className="col-3" scope="col">{user}</th>
+                                                ))}
 
-                                        {/* <th scope="col">Bill No.</th> */}
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                                {/* <th scope="col">Bill No.</th> */}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                                    {tbody.map((data, index) => (
-                                        <tr key={index}>
-                                            <td>{data[0]}</td>
-                                            <td>{data[1]}</td>
-                                            <td>{data[2]}</td>
-                                            <td>{data[3]}</td>
-                                            <td>{data[4]}</td>
-                                            <td>{data[5]}</td>
-                                            <td>{data[6]}</td>
-                                        </tr>
-                                    ))}
+                                            {tbody.map((data, index) => (
+                                                <tr key={index}>
+                                                    {/* <td style={}     className="col-3">{index}</td> */}
+                                                    <td className="col-3">{data[0]}</td>
+                                                    <td className="col-3">{data[1]}</td>
+                                                    <td className="col-3">{data[2]}</td>
+                                                    <td className="col-3">{data[3]}</td>
+                                                    <td className="col-3">{data[4]}</td>
+                                                    <td className="col-3">{data[5]}</td>
+                                                    <td className="col-3">{data[6]}</td>
+                                                </tr>
+                                            ))}
 
-                                    {/* {userData.map((data) => (
+                                            {/* {userData.map((data) => (
                                         // display a <div> element with the user.name and user.type
                                         // parent element needs to have a unique key
                                         // <div key={user.id}>
@@ -166,24 +184,26 @@ function Ledgers() {
                                         </tr>
 
                                     ))} */}
-                                </tbody>
-                                <tfoot>
+                                        </tbody>
+                                        <tfoot>
 
-                                    <tr>
-                                        {tfoot.map((data, index) => (
-                                            <td key={index}>{data}</td>
-                                        ))}
-                                    </tr>
+                                            <tr>
+                                                {tfoot.map((data, index) => (
+                                                    <td key={index}>{data}</td>
+                                                ))}
+                                            </tr>
 
-                                </tfoot>
-                            </>
-                            ) : (
-                                <h1>Data not found</h1>
-                            )}
+                                        </tfoot>
+                                    </>
+                                    ) : (
+                                        <h1>Data not found</h1>
+                                    )}
 
 
-                        </table>
-                    </div>
+                                </table>
+                            </div>
+                        </div> : <h1 className="errMess">Data not found !</h1>
+                    }
                 </div>
             </div>
         </div>

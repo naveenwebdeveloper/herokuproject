@@ -71,7 +71,7 @@ const LoginForm = () => {
       <div className="form-d">
         <p className="Login_message">{apiData.message}</p>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <label htmlFor="inputUsername">{userToken}</label>
+          <label htmlFor="inputUsername">Username</label>
           <div className="Input-icon">
             <input
               type="text"
@@ -90,7 +90,7 @@ const LoginForm = () => {
 
           {errors.Username && <p className="error">{errors.Username.message}</p>}
 
-          <label htmlFor="inputPassword">{Uid}</label>
+          <label htmlFor="inputPassword">Password</label>
           <div className="Input-icon">
             <input
               type="password"
@@ -102,7 +102,8 @@ const LoginForm = () => {
           </div>
           {errors.password && <p className="error">{errors.password.message}</p>}
           <div className="Forgot-p">
-            <button type="submit">Login</button>
+            {/* <button type="submit">Login</button> */}
+            <button type="submit" className="btn btn-primary">Login</button>
             <div className="forgot-content">
               <Link to="/ForgotUser">
                 <p>Forgot Username?</p>
@@ -114,7 +115,6 @@ const LoginForm = () => {
           </div>
         </form>
       </div >
-      <button onClick={() => dispatch(userLogin({ demotoken, demouid }))} >change the state</button>
     </div >
   );
 };

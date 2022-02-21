@@ -10,7 +10,7 @@ function Mprofile(props) {
                         <div className="card">
                             <div className="card-body">
                                 <div className="d-flex flex-column align-items-center text-center">
-                                    <img src={props.Data.logo} alt="Admin" width="150" />
+                                    {/* <img src={props.Data.logo} alt="Admin" width="150" /> */}
                                     <div className="mt-3">
                                         <h4>{props.Data.name}</h4>
                                         <p className="text-secondary mb-1">{props.Data.email}</p>

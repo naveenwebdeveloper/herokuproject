@@ -7,7 +7,7 @@ import {
 function header(props) {
 
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="primary" variant="dark" className='fixed-top' expand="lg">
             <Container>
                 <Navbar.Brand ><Link to="/">Bharat Bills</Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
